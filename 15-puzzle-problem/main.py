@@ -1,19 +1,27 @@
-import move.move as move
+import search.bfs as BFS
+import search.dfs as DFS
+import search.heuristics as HS
 import numpy as np
 
 def main():
-   board = puzzle_board()
-   i, j = move.emptyChords(board)
-   print(board, i, j)
+    print("What type of search do you want to perform on the puzzle?")
+    searchType = input("Choose one: B (bfs), D (dfs), H (heurisitics)\n")
+    runner(searchType)
 
-
+def runner(choice):
+    board = puzzle_board()
+    if choice == "B" or choice == "b":
+        BFS.bfs(board)
+    elif choice == "D" or choice == "d":
+        DFS.dfs(board)
+    elif choice == "H" or choice == "h":
+        HS.hs(board)
+    else:
+        print("Run program again and select a proper type.")
+        exit()
 
 def puzzle_board():
-    '''rng = default_rng()
-    vals = rng.standard_normal(10)
-    more_vals = rng.standard_normal(10)'''
     board = np.arange(16)
-    #board = np.where(board == 0, ' ', board)
     np.random.shuffle(board)
     board = np.reshape(board, (4,4))
     

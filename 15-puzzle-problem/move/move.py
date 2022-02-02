@@ -7,20 +7,49 @@ def emptyChords(board):
     return (i,j)
 
 def up(board):
-    print("up", board)
     i,j = emptyChords(board)
-    moveup = i - 1
-    tempBoard = d
+    if i > 0:
+        movingElement = board[i-1][j]
+        temp = np.where(board == movingElement, 17, board)
+        temp2 = np.where(temp == 0, movingElement, temp)
+        board = (np.where(temp2 == 17, 0, temp2))
 
+        return board
+    else: return None
     
 def down(board):
-    print("down", board)
+    i,j = emptyChords(board)
+    if i < 3:
+        movingElement = board[i+1][j]
+        temp = np.where(board == movingElement, 17, board)
+        temp2 = np.where(temp == 0, movingElement, temp)
+        board = (np.where(temp2 == 17, 0, temp2))
+    
+        return board
+
+    else: return None
 
 def left(board):
-    print("left", board)
+    i,j = emptyChords(board)
+    if j > 0:
+        movingElement = board[i][j-1]
+        temp = np.where(board == movingElement, 17, board)
+        temp2 = np.where(temp == 0, movingElement, temp)
+        board = (np.where(temp2 == 17, 0, temp2))
+    
+        return board
+    else: return None
 
 def right(board):
-    print("right", board)
+    i,j = emptyChords(board)
+    if j < 3:
+        movingElement = board[i][j+1]
+        temp = np.where(board == movingElement, 17, board)
+        temp2 = np.where(temp == 0, movingElement, temp)
+        board = (np.where(temp2 == 17, 0, temp2))
+    
+        return board
+    else: return None
 
 def move(where, board):
     if where == 'up':
