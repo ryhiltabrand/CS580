@@ -1,8 +1,10 @@
 from xml.dom.minidom import Element
 import numpy as np
-import sys
-sys.path.insert(0, '15-puzzle-problem/move/move.py')
+#import sys
+#sys.path.insert(0, '15-puzzle-problem/move/move.py')
 import move.move as move
+import timeit
+import tracemalloc
 
 class puzzle:
     def __init__(self, number, board):
@@ -10,36 +12,45 @@ class puzzle:
         self.board = board
 
 def bfs(board):
-    f = open("results", "a")
+    start = timeit.default_timer()
+    tracemalloc.start()
+    ListMoves = ""
+    Printed_Board = open("results/bfs/Boards", "a")
+    Results = open("results/bfs/Results", "a")
     print(board)
+
     moves = ['up', 'down', 'left', 'right']
     goal_board = np.array([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0]).reshape(4,4)
-    #print(goal_board.tolist())
     queue = [puzzle(0, board)]
     Number = 0
     explored = []
-    #print (queue[0])
     
-    #found = False
     while queue:
-        currentBoard = queue.pop()
-        f.write(f"{currentBoard.board}\n")
+        currentBoard = queue.pop(0)
+        #Printed_Board.write(f"{currentBoard.board}\n")
 
 
         if currentBoard.board.tolist() == goal_board.tolist():
-            print('winner winner chicken dinner')
+            break
         for x in moves:
             
-            possible = move.move(x,currentBoard.board)
-            #print(possible)
+            #print(move.move(x,currentBoard.board))
+            possible, m = move.move(x,currentBoard.board)
             
-            if possible is not None and possible.tolist() not in explored:
+            
+            if possible is not "None" and possible.tolist() not in explored:
+                #print(m)
+                Printed_Board.write(f"{possible}\n")
+
+                ListMoves = ListMoves + m
                 number =+ 1
                 queue.append(puzzle(number, possible))
+                if possible.tolist() == goal_board.tolist():
+                    break
 
         explored.append(currentBoard.board.tolist())
-            
-        #print(len(explored))
-        #explored.append(node.tolist())
-        #queue.pop(0)
-        #node = queue[0]
+    stop = timeit.default_timer()
+    total_Memory = tracemalloc.get_tracemalloc_memory()
+    tracemalloc.stop()
+    execucation_time = stop - start
+    Results.write(f"Moves: {ListMoves}\nTime: {execucation_time}\nNodes explored: {len(explored)}\nMemory Used: {total_Memory}" )

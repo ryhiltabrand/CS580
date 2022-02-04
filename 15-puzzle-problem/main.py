@@ -9,7 +9,8 @@ def main():
     runner(searchType)
 
 def runner(choice):
-    board = puzzle_board()
+    #board = puzzle_board()
+    board = np.array([1,0,2,3,4,5,6,7,8,9,10,11,12,13,14,15]).reshape(4,4)
     if choice == "B" or choice == "b":
         BFS.bfs(board)
     elif choice == "D" or choice == "d":
