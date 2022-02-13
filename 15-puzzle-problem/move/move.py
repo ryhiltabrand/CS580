@@ -1,12 +1,42 @@
 import numpy as np
 
 def emptyChords(board):
+    """
+    Finds cordinates of the o puzzle piece on the current nodes board
+
+    Parameters
+    ----------
+    board : numpy array
+        current nodes puzzle board
+
+    Returns
+    -------
+    int
+        The x cordintate of 0
+    int 
+        The y cordinate of 0
+    """
     i, j = np.where(board == 0)
     i = int(i)
     j = int(j)
     return (i,j)
 
 def up(board):
+    """
+    Swaps 0 and puzzle piece above it
+
+    Parameters
+    ----------
+    board : numpy array
+        current nodes puzzle board
+
+    Returns
+    -------
+    numpy array
+        New nodes board after swap
+    str 
+        U
+    """
     i,j = emptyChords(board)
     if i > 0:
         movingElement = board[i-1][j]
@@ -16,9 +46,24 @@ def up(board):
 
         return (board, "U")
         
-    else: return "None", "N"
+    else: return None, "N"
     
 def down(board):
+    """
+    Swaps 0 and puzzle piece below it
+
+    Parameters
+    ----------
+    board : numpy array
+        current nodes puzzle board
+
+    Returns
+    -------
+    numpy array
+        New nodes board after swap
+    str 
+        D
+    """
     i,j = emptyChords(board)
     if i < 3:
         movingElement = board[i+1][j]
@@ -28,9 +73,24 @@ def down(board):
     
         return (board, "D")
 
-    else: return "None", "N"
+    else: return None, "N"
 
 def left(board):
+    """
+    Swaps 0 and puzzle piece to the left of it
+
+    Parameters
+    ----------
+    board : numpy array
+        current nodes puzzle board
+
+    Returns
+    -------
+    numpy array
+        New nodes board after swap
+    str 
+        L
+    """
     i,j = emptyChords(board)
     if j > 0:
         movingElement = board[i][j-1]
@@ -39,9 +99,24 @@ def left(board):
         board = (np.where(temp2 == 17, 0, temp2))
     
         return (board, "L")
-    else: return "None", "N"
+    else: return None, "N"
 
 def right(board):
+    """
+    Swaps 0 and puzzle piece to the right of it
+
+    Parameters
+    ----------
+    board : numpy array
+        current nodes puzzle board
+
+    Returns
+    -------
+    numpy array
+        New nodes board after swap
+    str 
+        U
+    """
     i,j = emptyChords(board)
     if j < 3:
         movingElement = board[i][j+1]
@@ -50,14 +125,27 @@ def right(board):
         board = (np.where(temp2 == 17, 0, temp2))
     
         return (board, "R")
-    else: return "None", "None"
+    else: return None, "N"
 
 def move(where, board):
+    """
+    Calls proper move function
+
+    Parameters
+    ----------
+    where : str
+        The move it wants to conduct (up, down, left, right)
+    board : numpy array
+        current nodes puzzle board
+
+    Returns
+    -------
+    Nested return
+        The updated board after the move and the string associated with the move to append to list
+    """
     if where == 'up':
-        #(print(up(board)))
         b, m = (up(board))
         return(b,m)
-        #return (up(board))
     elif where == 'down':
         return (down(board))
     elif where == 'left':
@@ -66,4 +154,4 @@ def move(where, board):
         return (right(board))
     else:
         print("move went wrong")
-        return ("None", "None")
+        return (None, "None")
