@@ -51,8 +51,9 @@ def hs(board):
     ListMoves = ""
     Printed_Board = open("results/h/Boards", "a")
     Results = open("results/h/Results", "a")
-    queue = [puzzle(0, board, man_score1, dis_score1)]
+    #queue = [puzzle(0, board, man_score1, dis_score1)]
     Number = 0
+    queue = {Number: puzzle(0, board, man_score1, dis_score1)}
     explored = []
     exploredDict = {}
 
@@ -64,7 +65,10 @@ def hs(board):
         """
         
         #Take lead of queue as it will have the lowest score
-        currentBoard = queue.pop(0)
+        #currentBoard = queue.pop(0)
+        min_value = min(queue.keys())
+        currentBoard = queue.pop(min_value)
+        
         
         #breaks loop if we find goal state
         if currentBoard.board.tolist() == goal_board.tolist():
@@ -89,7 +93,8 @@ def hs(board):
                 dis_score = displacement(possible, goal_board)
 
                 #add the current puzzle to the queue
-                queue.append(puzzle(Number, possible, man_score, dis_score))
+                #queue.append(puzzle(Number, possible, man_score, dis_score))
+                queue[man_score+dis_score]=puzzle(Number, possible, man_score, dis_score)
 
                 #if it the goal is found break out for loop, and then break out while loop
                 if possible.tolist() == goal_board.tolist():
@@ -99,7 +104,9 @@ def hs(board):
         #explored.append(currentBoard.board.tolist())
         exploredDict[currentBoard.board.tobytes()] = Number
         #sort the quese with the lowest manhatten and displaced score at the front
-        queue.sort(key=lambda x: x.manhatten + x.displaced)           
+
+        #queue.sort(key=lambda x: x.manhatten + x.displaced)
+           
 
     #end incrementation and print output
     stop = timeit.default_timer()
