@@ -36,14 +36,13 @@ def dfs(board):
     start = timeit.default_timer()
     tracemalloc.start()
     ListMoves = ""
-    Printed_Board = open("results/dfs/Boards", "a")
-    Results = open("results/dfs/Results", "a")
+    Printed_Board = open("results/dfs/Boards.txt", "a")
+    Results = open("results/dfs/Results.txt", "a")
 
     print(board)
 
     moves = ['up', 'down', 'left', 'right']
     goal_board = np.array([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0]).reshape(4,4)
-    
     Number = 0
     queue = [puzzle(Number, board)]
     
@@ -88,4 +87,4 @@ def dfs(board):
     total_Memory = tracemalloc.get_tracemalloc_memory()
     tracemalloc.stop()
     execucation_time = stop - start
-    Results.write(f"Moves: {ListMoves}\nTime: {execucation_time}\nNodes explored: {len(explored)}\nMemory Used: {total_Memory}" )
+    Results.write(f"Moves: {ListMoves}\nTime: {execucation_time}\nNodes explored: {len(exploredDict)}\nMemory Used: {total_Memory}" )

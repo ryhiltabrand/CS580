@@ -36,8 +36,8 @@ def bfs(board):
     start = timeit.default_timer()
     tracemalloc.start()
     ListMoves = ""
-    Printed_Board = open("results/bfs/Boards", "a")
-    Results = open("results/bfs/Results", "a")
+    Printed_Board = open("results/bfs/Boards.txt", "a")
+    Results = open("results/bfs/Results.txt", "a")
 
     print(board)
 
@@ -91,4 +91,4 @@ def bfs(board):
     total_Memory = tracemalloc.get_tracemalloc_memory()
     tracemalloc.stop()
     execucation_time = stop - start
-    Results.write(f"Moves: {ListMoves}\nTime: {execucation_time}\nNodes explored: {len(explored)}\nMemory Used: {total_Memory}" )
+    Results.write(f"Moves: {ListMoves}\nTime: {execucation_time}\nNodes explored: {len(exploredDict)}\nMemory Used: {total_Memory}" )

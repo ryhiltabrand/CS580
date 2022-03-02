@@ -49,8 +49,8 @@ def hs(board):
     start = timeit.default_timer()
     tracemalloc.start()
     ListMoves = ""
-    Printed_Board = open("results/h/Boards", "a")
-    Results = open("results/h/Results", "a")
+    Printed_Board = open("results/h/Boards.txt", "a")
+    Results = open("results/h/Results.txt", "a")
     #queue = [puzzle(0, board, man_score1, dis_score1)]
     Number = 0
     queue = {Number: puzzle(0, board, man_score1, dis_score1)}
@@ -113,7 +113,7 @@ def hs(board):
     total_Memory = tracemalloc.get_tracemalloc_memory()
     tracemalloc.stop()
     execucation_time = stop - start
-    Results.write(f"Moves: {ListMoves}\nTime: {execucation_time}\nNodes explored: {len(explored)}\nMemory Used: {total_Memory}" )
+    Results.write(f"Moves: {ListMoves}\nTime: {execucation_time}\nNodes explored: {len(exploredDict)}\nMemory Used: {total_Memory}" )
 
 def manhattan(current, goal):
     """

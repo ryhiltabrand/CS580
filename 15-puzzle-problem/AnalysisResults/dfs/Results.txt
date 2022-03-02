@@ -1,0 +1,4 @@
+Moves: URURUR
+Time: 0.0020523750000003282
+Nodes explored: 3
+Memory Used: 14848
