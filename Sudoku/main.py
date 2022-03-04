@@ -1,17 +1,30 @@
 import numpy as np
 import Tasks.backtracking as dt
+import Tasks.csp as csp
+import sys, threading
+sys.setrecursionlimit(10**7) # max depth of recursion
+threading.stack_size(2**27)  # new thread will get stack of such size
 
 def main():
     dif = input("easy, medium, hard, evil: ")
     s_puzzle = puzzle(dif)
 
-    print(s_puzzle)
-    dt.backtracking(s_puzzle)
+    #print(s_puzzle)
+
+    #bt = dt.backtracking()
+    #print(bt.solve(s_puzzle, 0))
+    #print(bt.c_board)
+
+    contraint = csp.csp(s_puzzle)
+    
+    
+   
 
 def puzzle(choice):
     if choice == "easy":
         ### Easy Puzzle
-        easy = np.array([[0, 3, 0, 0, 8, 0, 0, 0, 6],
+        easy = np.array([
+                [0, 3, 0, 0, 8, 0, 0, 0, 6],
                 [5, 0, 0, 2, 9, 4, 7, 1, 0],
                 [0, 0, 0, 3, 0, 0, 5, 0, 0],
                 [0, 0, 5, 0, 1, 0, 8, 0, 4],
@@ -23,7 +36,8 @@ def puzzle(choice):
         return easy
     elif choice == "medium":
         ### Medium puzzle
-        medium = np.array([[3, 0, 8, 2, 9, 6, 0, 0, 0],
+        medium = np.array([
+                [3, 0, 8, 2, 9, 6, 0, 0, 0],
                 [0, 4, 0, 0, 0, 8, 0, 0, 0],
                 [5, 0, 2, 1, 0, 0, 0, 8, 7],
                 [0, 1, 3, 0, 0, 0, 0, 0, 0],
@@ -35,7 +49,8 @@ def puzzle(choice):
         return medium
     elif choice == "hard":
         ### Hard Puzzle
-        hard   = np.array([[7, 0, 0, 0, 0, 0, 0, 0, 0],
+        hard   = np.array([
+                [7, 0, 0, 0, 0, 0, 0, 0, 0],
                 [6, 0, 0, 4, 1, 0, 2, 5, 0],
                 [0, 1, 3, 0, 9, 5, 0, 0, 0],
                 [8, 6, 0, 0, 0, 0, 0, 0, 0],
@@ -47,7 +62,8 @@ def puzzle(choice):
         return hard
     elif choice == "evil":
         ### EVIL Puzzle
-        evil   = np.array([[0, 6, 0, 8, 0, 0, 0, 0, 0],
+        evil   = np.array([
+                [0, 6, 0, 8, 0, 0, 0, 0, 0],
                 [0, 0, 4, 0, 6, 0, 0, 0, 9],
                 [1, 0, 0, 0, 4, 3, 0, 6, 0],
                 [0, 5, 2, 0, 0, 0, 0, 0, 0],
